@@ -1,0 +1,301 @@
+import numpy as np #procesamiento numerico
+import scipy as sc # Añade y expande las funcionalidades de numpy
+import matplotlib.pyplot as plt #sirve para graficos 
+import random
+import math
+import sympy as sp
+
+#Data set
+
+plt.plot([2, 10], [2, 10], 'bo')
+plt.plot([2, 10], [ 10, 2], 'ro')
+plt.axis([0, 12, 0, 12])
+plt.show()
+
+
+
+W11 = random.gauss(0, 1)
+W12 = random.gauss(0, 1)
+W21 = random.gauss(0, 1)
+W22 = random.gauss(0, 1)
+Wb1 = random.gauss(0, 1)
+Wb2 = random.gauss(0, 1)
+J1  = random.gauss(0, 1)
+J2  = random.gauss(0, 1)
+
+print(W11,W12,W21,W22,Wb1,Wb2,J1,J2)
+
+print('Tiene dos opciones 1 o 0')
+A1 = int (input('Coordenada en x ='))
+A2 = int (input('Coordenada en y ='))
+
+print('Tiene dos opciones 1 o 0')
+B1 = int (input('Coordenada en x ='))
+B2 = int (input('Coordenada en y ='))
+
+print('Tiene dos opciones 1 o 0')
+C1 = int (input('Coordenada en x ='))
+C2 = int (input('Coordenada en y ='))
+
+print('Tiene dos opciones 1 o 0')
+D1 = int (input('Coordenada en x ='))
+D2 = int (input('Coordenada en y ='))
+
+#Redes neuronales para el funcionamiento de 
+for i in range(0, 5000):
+      #Feedfordware 
+
+      #Neurona [1]
+      P1= ((A1 * W11) + (A2 * W21) + (1 * Wb1)) 
+      type(P1)
+      h1 =1/(1+(math.e ** -P1))
+
+
+      #Neurona [2]
+      P2=A1*W12+A2*W22+1*Wb2
+      type(P2)
+      h2=1/(1+(math.e ** -P2))
+
+
+      Out1=h1*J1+h2*J2
+      
+
+      #________________________________________________________________________
+      if A1==0 and A2==0:
+        y=0 
+      if A1==1 and A2==1:
+        y=0 
+      if A1==1 and A2==0:
+        y=1
+      if A1==0 and A2==1:
+        y=1
+
+        
+
+      E1=(Out1-y)**2
+
+      GS1=(Out1-y)*h1#primer gradiente para calcular los pesos de salida 
+      GS2=(Out1-y)*h2#primer gradiente para calcular los pesos de salida 
+
+      G11=(Out1-y)*J1*h1*(1-h1)*(A1)
+      G21=(Out1-y)*J1*h1*(1-h1)*(A2)
+      Gb1=(Out1-y)*J1*h1*(1-h1)*(1)
+
+      G12=(Out1-y)*J2*h2*(1-h2)*(A1)
+      G22=(Out1-y)*J2*h2*(1-h2)*(A2)
+      Gb2=(Out1-y)*J2*h2*(1-h2)*(1)
+
+      #Pesos
+      n=0.2 #learning rate
+
+      J1n=(J1-n*GS1)
+      J1=J1n
+      J2n=J2-n*GS2
+      J2=J2n
+
+      W11n = (W11-n*G11)
+      W11=W11n
+      W12n = (W12-n*G12)
+      W12=W12n
+      W21n = (W21-n*G21)
+      W21=W21n
+      W22n = (W22-n*G22)
+      W22=W22n
+      Wb1n = (Wb1-n*Gb1)
+      Wb1=Wb1n
+      Wb2n = (Wb2-n*Gb2)
+      Wb2=Wb2n
+
+
+
+
+      #Feedfordware 
+
+      #Neurona [1]
+      P1= ((B1 * W11) + (B2 * W21) + (1 * Wb1)) 
+      type(P1)
+      h1 =1/(1+(math.e ** -P1))
+
+
+      #Neurona [2]
+      P2=B1*W12+B2*W22+1*Wb2
+      type(P2)
+      h2=1/(1+(math.e ** -P2))
+
+
+      Out2=h1*J1+h2*J2
+      
+      #________________________________________________________________________
+      if B1==0 and B2==0:
+        y=0 
+      if B1==1 and B2==1:
+        y=0 
+      if B1==1 and B2==0:
+        y=1
+      if B1==0 and B2==1:
+        y=1
+
+      E2=(Out2-y)**2
+
+      GS1=(Out2-y)*h1#primer gradiente para calcular los pesos de salida 
+      GS2=(Out2-y)*h2#primer gradiente para calcular los pesos de salida 
+
+      G11=(Out2-y)*J1*h1*(1-h1)*(B1)
+      G21=(Out2-y)*J1*h1*(1-h1)*(B2)
+      Gb1=(Out2-y)*J1*h1*(1-h1)*(1)
+
+      G12=(Out2-y)*J2*h2*(1-h2)*(B1)
+      G22=(Out2-y)*J2*h2*(1-h2)*(B2)
+      Gb2=(Out2-y)*J2*h2*(1-h2)*(1)
+
+      #Pesos
+
+      J1n=(J1-n*GS1)
+      J1=J1n
+      J2n=J2-n*GS2
+      J2=J2n
+
+      W11n = (W11-n*G11)
+      W11=W11n
+      W12n = (W12-n*G12)
+      W12=W12n
+      W21n = (W21-n*G21)
+      W21=W21n
+      W22n = (W22-n*G22)
+      W22=W22n
+      Wb1n = (Wb1-n*Gb1)
+      Wb1=Wb1n
+      Wb2n = (Wb2-n*Gb2)
+      Wb2=Wb2n
+
+
+
+      #Feedfordware 
+
+      #Neurona [1]
+      P1= ((C1 * W11) + (C2 * W21) + (1 * Wb1)) 
+      type(P1)
+      h1 =1/(1+(math.e ** -P1))
+
+
+      #Neurona [2]
+      P2=C1*W12+C2*W22+1*Wb2
+      type(P2)
+      h2=1/(1+(math.e ** -P2))
+
+
+      Out3=h1*J1+h2*J2
+      
+      #________________________________________________________________________
+      if C1==0 and C2==0:
+        y=0 
+      if C1==1 and C2==1:
+        y=0 
+      if C1==1 and C2==0:
+        y=1
+      if C1==0 and C2==1:
+        y=1
+
+      E3=(Out3-y)**2
+
+      GS1=(Out3-y)*h1#primer gradiente para calcular los pesos de salida 
+      GS2=(Out3-y)*h2#primer gradiente para calcular los pesos de salida 
+
+      G11=(Out3-y)*J1*h1*(1-h1)*(C1)
+      G21=(Out3-y)*J1*h1*(1-h1)*(C2)
+      Gb1=(Out3-y)*J1*h1*(1-h1)*(1)
+
+      G12=(Out3-y)*J2*h2*(1-h2)*(C1)
+      G22=(Out3-y)*J2*h2*(1-h2)*(C2)
+      Gb2=(Out3-y)*J2*h2*(1-h2)*(1)
+
+      #Pesos
+
+      J1n=(J1-n*GS1)
+      J1=J1n
+      J2n=J2-n*GS2
+      J2=J2n
+
+      W11n = (W11-n*G11)
+      W11=W11n
+      W12n = (W12-n*G12)
+      W12=W12n
+      W21n = (W21-n*G21)
+      W21=W21n
+      W22n = (W22-n*G22)
+      W22=W22n
+      Wb1n = (Wb1-n*Gb1)
+      Wb1=Wb1n
+      Wb2n = (Wb2-n*Gb2)
+      Wb2=Wb2n
+
+
+
+      #Feedfordware 
+
+      #Neurona [1]
+      P1= ((D1 * W11) + (D2 * W21) + (1 * Wb1)) 
+      type(P1)
+      h1 =1/(1+(math.e ** -P1))
+
+
+      #Neurona [2]
+      P2=D1*W12+D2*W22+1*Wb2
+      type(P2)
+      h2=1/(1+(math.e ** -P2))
+
+
+      Out4=h1*J1+h2*J2
+      
+      #________________________________________________________________________
+      if D1==0 and D2==0:
+        y=0 
+      if D1==1 and D2==1:
+        y=0 
+      if D1==1 and D2==0:
+        y=1
+      if D1==0 and D2==1:
+        y=1
+
+      E4=(Out4-y)**2
+
+      GS1=(Out4-y)*h1#primer gradiente para calcular los pesos de salida 
+      GS2=(Out4-y)*h2#primer gradiente para calcular los pesos de salida 
+
+      G11=(Out4-y)*J1*h1*(1-h1)*(D1)
+      G21=(Out4-y)*J1*h1*(1-h1)*(D2)
+      Gb1=(Out4-y)*J1*h1*(1-h1)*(1)
+
+      G12=(Out4-y)*J2*h2*(1-h2)*(D1)
+      G22=(Out4-y)*J2*h2*(1-h2)*(D2)
+      Gb2=(Out4-y)*J2*h2*(1-h2)*(1)
+
+      #Pesos
+
+      J1n=(J1-n*GS1)
+      J1=J1n
+      J2n=J2-n*GS2
+      J2=J2n
+
+      W11n = (W11-n*G11)
+      W11=W11n
+      W12n = (W12-n*G12)
+      W12=W12n
+      W21n = (W21-n*G21)
+      W21=W21n
+      W22n = (W22-n*G22)
+      W22=W22n
+      Wb1n = (Wb1-n*Gb1)
+      Wb1=Wb1n
+      Wb2n = (Wb2-n*Gb2)
+      Wb2=Wb2n
+
+
+      Etot=(1/2)*(E1+E2+E3+E4)
+      print(Etot)
+print(Out1, Out2, Out3, Out4)
+print()
+print(W11,W12,W21,W22,Wb1,Wb2)
+
+
+
