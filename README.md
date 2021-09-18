@@ -4,3 +4,9 @@ An artificial neural network that can simulate any two-input, four-output logic 
 Circuit with ESP8266 "Arduino"
 
 ![XOR_ANN](https://user-images.githubusercontent.com/90413699/133907475-c402a153-a51c-46ec-9001-70a02b5a1c10.PNG)
+
+Video of how it works
+
+Video of its operation
+
+https://youtu.be/kqCBBa63Wms
