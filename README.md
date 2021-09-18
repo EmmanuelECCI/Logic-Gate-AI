@@ -7,6 +7,5 @@ Circuit with ESP8266 "Arduino"
 
 Video of how it works
 
-Video of its operation
 
 https://youtu.be/kqCBBa63Wms
