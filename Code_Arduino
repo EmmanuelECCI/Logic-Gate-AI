@@ -1,0 +1,47 @@
+//Utilizando un ESP8266 o NodemuV3
+
+float W11=-4.148191283811935;
+float W12=-3.7465146715981117;
+float W21=-4.183455908073518;
+float W22=-3.753632936820472;
+float Wb1=0.7896941512432863;
+float Wb2=3.167030287182373;
+float J1=-4.4651155206374105; 
+float J2=3.200742476930554 ;
+
+float  E=2.718281828459045235360287471352;
+float P1,P2,h1,h2,Out1;
+int A1,A2;
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+pinMode(16, OUTPUT);
+pinMode(5 , INPUT);
+pinMode(4 , INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+A1=digitalRead(5);
+A2=digitalRead(4);
+
+ //Neurona [1]
+      P1= ((A1 * W11) + (A2 * W21) + (1 * Wb1)); 
+      h1=1/(1+(pow(E, -P1)));
+
+ //#Neurona [2]
+      P2=A1*W12+A2*W22+1*Wb2;
+      h2=1/(1+(pow(E, -P2)));
+      
+
+      Out1=h1*J1+h2*J2;
+      Serial.println(Out1);
+      Serial.println(A1);
+      Serial.println(A2);
+
+    if(Out1>0.99){
+      digitalWrite(16, true);
+      }else{
+        digitalWrite(16, false);
+        }
+}
